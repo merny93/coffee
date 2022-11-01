@@ -1,0 +1,19 @@
+collections:
+  locations:
+    output: true
+
+defaults:
+  - scope:
+      path: ""
+      type: "locations"
+    values:
+      layout: "location"
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "empty"
+  - scope:
+      path: ""
+    values:
+      layout: "default"

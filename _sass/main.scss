@@ -1,0 +1,35 @@
+.current {
+    color: green;
+}
+body {
+    background-color:  #965d0265;
+}
+
+.location_container{
+    border: solid;
+    border-radius: 5px;
+    margin: 10px;
+    width: 50%;
+    padding: 10px;
+    display: flex;
+    // float: left;
+}
+
+// .location_container{
+//     position: relative;
+// }
+
+.score_container{
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.score_table{
+    height: min-content;
+    text-align: center;
+    padding: 3px;
+    border: solid 1px;
+    border-radius: 3px;
+    margin: 5px;
+}

@@ -1,0 +1,17 @@
+---
+layout: default
+---
+
+<h1>{{ page.location_visible_name }}</h1>
+
+<!-- Now add the short description or whatever  -->
+{{ content }} 
+
+<ul>
+    {% assign filtered_posts = site.posts | where: 'location', page.location_visible_name %}
+    <!-- make filtered_posts which is all the posts where location matches location_visible_name -->
+    {% for post in filtered_posts%}
+        <!-- Styling for posts goes in here -->
+        <li>{{post.content}} <br> {{post.date | date_to_string}}</li>
+    {% endfor %}
+</ul>
