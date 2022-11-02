@@ -9,7 +9,7 @@ body {
     border: solid;
     border-radius: 5px;
     margin: 10px;
-    width: 50%;
+    width: m#{a}x(50vw, 600px);
     padding: 10px;
     display: flex;
     // float: left;
@@ -28,8 +28,9 @@ body {
 .score_table{
     height: min-content;
     text-align: center;
-    padding: 3px;
+    padding: 5px;
     border: solid 1px;
     border-radius: 3px;
     margin: 5px;
+    line-height: 125%;
 }

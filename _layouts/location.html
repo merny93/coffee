@@ -11,7 +11,23 @@ layout: default
     {% assign filtered_posts = site.posts | where: 'location', page.location_visible_name %}
     <!-- make filtered_posts which is all the posts where location matches location_visible_name -->
     {% for post in filtered_posts%}
+        <div class="score_container">
+            <div class="score_table">
+                {{post.score_overall}} <br> Overall
+            </div>
+            <div class="score_table">
+                {{post.score_vibe}} <br> Vibe
+            </div>
+        </div>
+        <div class="score_container">
+            {% for key_value_pair in post.scores %}
+                <div class = "score_table">
+                    {{key_value_pair[0]}} gets a {{key_value_pair[1]}} <br>
+                </div>
+            {% endfor %}
+        </div>
         <!-- Styling for posts goes in here -->
-        <li>{{post.content}} <br> {{post.date | date_to_string}}</li>
+        <li>{{post.content}} <br> {{post.date | date_to_string}}</li> <br>
+        
     {% endfor %}
 </ul>

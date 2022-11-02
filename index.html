@@ -14,13 +14,14 @@ title: Home
         <h3><a href="{{ location.url }}">{{ location.location_visible_name }}</a></h3>
         {{ location.content | markdownify }}
     </div>
+    {% assign filtered_review = site.posts | where: 'location', location.location_visible_name %}
     <div class="score_container">
-        <table class="score_table">
-            <tr><td> 2</td></tr><tr><td> covfefe</td></tr>
-        </table>
-        <table class="score_table">
-            <tr><td> 2</td></tr><tr><td> vibe</td></tr>
-        </table>
+        <div class="score_table">
+            {{filtered_review[0].score_overall}} <br> Overall
+        </div>
+        <div class="score_table">
+            {{filtered_review[0].score_vibe}} <br> Vibe
+        </div>
     </div>
 </div>
 {% endfor %}

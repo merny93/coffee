@@ -1,6 +1,7 @@
 ---
 location: A new location
-overall_review: 5
+score_overall: 13
+score_vibe: 42
 ---
 
 write your review here
