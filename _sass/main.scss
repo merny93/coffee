@@ -5,6 +5,12 @@ body {
     background-color:  #965d0265;
 }
 
+// score base styling
+@mixin score_base(){
+    display: flex;
+    align-items: center;
+}
+
 .location_container{
     border: solid;
     border-radius: 5px;
@@ -12,18 +18,15 @@ body {
     width: m#{a}x(50vw, 600px);
     padding: 10px;
     display: flex;
-    // float: left;
+    .score_container{
+        // for score in main page
+        @include score_base;
+        margin-left: auto;
+    }
 }
 
-// .location_container{
-//     position: relative;
-// }
 
-.score_container{
-    display: flex;
-    align-items: center;
-    margin-left: auto;
-}
+
 
 .score_table{
     height: min-content;
@@ -33,4 +36,35 @@ body {
     border-radius: 3px;
     margin: 5px;
     line-height: 125%;
+}
+
+.review{
+    border: solid 3px;
+    border-radius: 15px;
+    width: m#{a}x(65vw, 200px);
+    min-width: fit-content;
+    // width: 7%;
+    padding: 15px;
+    margin: 15px;
+}
+.review_scores_container{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    // flex-wrap: wrap;
+    .score_container{
+        // for all scores in location page
+        @include score_base;
+    }
+}
+.mainscore{
+    // for score in location page
+    margin-right: 25px;
+}
+.subscore{
+    // for subscore in location page
+    text-size-adjust: 50%;
+    margin-left: auto;
+    margin-top: 30px;
+    
 }

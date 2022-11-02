@@ -7,27 +7,32 @@ layout: default
 <!-- Now add the short description or whatever  -->
 {{ content }} 
 
-<ul>
-    {% assign filtered_posts = site.posts | where: 'location', page.location_visible_name %}
-    <!-- make filtered_posts which is all the posts where location matches location_visible_name -->
-    {% for post in filtered_posts%}
-        <div class="score_container">
-            <div class="score_table">
-                {{post.score_overall}} <br> Overall
-            </div>
-            <div class="score_table">
-                {{post.score_vibe}} <br> Vibe
-            </div>
-        </div>
-        <div class="score_container">
-            {% for key_value_pair in post.scores %}
-                <div class = "score_table">
-                    {{key_value_pair[0]}} gets a {{key_value_pair[1]}} <br>
+{% assign filtered_posts = site.posts | where: 'location', page.location_visible_name %}
+<!-- make filtered_posts which is all the posts where location matches location_visible_name -->
+<div class="reviews_container">
+    {% for post in filtered_posts %}
+    <div class="review">
+        <div class="review_scores_container">
+            <div class="score_container mainscore">
+                <div class="score_table">
+                    {{post.score_overall}} <br> Overall
                 </div>
-            {% endfor %}
+                <div class="score_table">
+                    {{post.score_vibe}} <br> Vibe
+                </div>
+            </div>
+            <div class="score_container subscore">
+                {% for key_value_pair in post.scores %}
+                    <div class = "subscore score_table">
+                        {{key_value_pair[1]}} <br> {{key_value_pair[0]}}
+                    </div>
+                {% endfor %}
+            </div>
         </div>
+        <div class="review_content">
         <!-- Styling for posts goes in here -->
-        <li>{{post.content}} <br> {{post.date | date_to_string}}</li> <br>
-        
+        {{post.content}} <br> {{post.date | date_to_string}}
+        </div>
+    </div>
     {% endfor %}
-</ul>
+</div>
