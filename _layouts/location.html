@@ -7,11 +7,26 @@ layout: default
 <!-- Now add the short description or whatever  -->
 {{ content }} 
 
+ <hr>
+
 {% assign filtered_posts = site.posts | where: 'location', page.location_visible_name %}
 <!-- make filtered_posts which is all the posts where location matches location_visible_name -->
 <div class="reviews_container">
     {% for post in filtered_posts %}
-    <div class="review">
+
+    <!------------------------------------------------------------>
+    <!-- Get the parity of the current itteration -->
+    {% assign parity = forloop.index0 | modulo:2%}
+
+    <!-- Set it left or right depending on the parity -->
+    {% if parity == 0 %}
+    <div class="review left">
+    {% else %}
+    <div class="review right">
+    {% endif %}
+    <!------------------------------------------------------------>
+
+        <!-- Set up the scores at the top of the review -->
         <div class="review_scores_container">
             <div class="score_container mainscore">
                 <div class="score_table">
@@ -29,9 +44,13 @@ layout: default
                 {% endfor %}
             </div>
         </div>
+
+        <hr>
+        
+        <!-- Put the actual review content in here -->
         <div class="review_content">
-        <!-- Styling for posts goes in here -->
-        {{post.content}} <br> {{post.date | date_to_string}}
+            <!-- Styling for posts goes in here -->
+            {{post.content}} <br> {{post.date | date_to_string}}
         </div>
     </div>
     {% endfor %}

@@ -9,9 +9,10 @@ title: Home
 
 
 {% for location in site.locations %}
+<a href="{{ location.url }}">
 <div class="location_container">
     <div class="description_holder" > 
-        <h3><a href="{{ location.url }}">{{ location.location_visible_name }}</a></h3>
+        <h2>{{ location.location_visible_name }}</h2>
         {{ location.content | markdownify }}
     </div>
     {% assign filtered_review = site.posts | where: 'location', location.location_visible_name %}
@@ -24,4 +25,5 @@ title: Home
         </div>
     </div>
 </div>
+</a>
 {% endfor %}
