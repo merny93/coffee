@@ -9,7 +9,7 @@ title: Home
 
 
 {% for location in site.locations %}
-<a href="{{ location.url }}">
+<a href="{{site.baseurl}}{{ location.url }}">
 <div class="location_container">
     <div class="description_holder" > 
         <h2>{{ location.location_visible_name }}</h2>
