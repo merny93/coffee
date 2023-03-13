@@ -5,25 +5,43 @@ layout: default
 title: Home
 ---
 
-<h1>Locations</h1>
 
 
-{% for location in site.locations %}
-<a href="{{site.baseurl}}{{ location.url }}">
-<div class="location_container">
-    <div class="description_holder" > 
-        <h2>{{ location.location_visible_name }}</h2>
-        {{ location.content | markdownify }}
-    </div>
-    {% assign filtered_review = site.posts | where: 'location', location.location_visible_name %}
-    <div class="score_container">
-        <div class="score_table">
-            {{filtered_review[0].score_overall}} <br> Overall
+
+<h3 id="title">Some Food Locations</h3>
+
+<div class="big-wrapper">
+    <div class="locations-wrapper column" style="position: relative;">
+        <div id="overlay">
+            <div class="overlay-wrapper">
+                <button id="close" onclick="closeLocation()">&#8617; close</button>
+                <div id="overlay-contents">
+                </div>
+            </div>
         </div>
-        <div class="score_table">
-            {{filtered_review[0].score_vibe}} <br> Vibe
+        {% for location in site.locations %}
+        <!-- <a href="{{site.baseurl}}{{ location.url }}"> -->
+        <div class="location_container" id="{{location.location_visible_name | slugify}}" onclick="openLocation('{{site.baseurl}}{{ location.url }}')">
+            <div class="description_holder" > 
+                <h4>{{ location.location_visible_name }}</h4>
+                {{ location.content | markdownify }}
+            </div>
+            {% assign filtered_review = site.posts | where: 'location', location.location_visible_name %}
+            <div class="score-container">
+                <div class="score-table">
+                    {{filtered_review[0].score_overall}} <br> Overall
+                </div>
+                <div class="score-table">
+                    {{filtered_review[0].score_vibe}} <br> Vibe
+                </div>
+            </div>
         </div>
-    </div>
+    {% endfor %}
+    </div> 
+    <!-- map -->
+    <div id="map" class="column" style="width: 200px;"></div>
 </div>
-</a>
-{% endfor %}
+
+<!-- load the js script -->
+<script src="{{site.baseurl}}/assets/js/script.js"></script>
+<script src="{{site.baseurl}}/assets/js/map.js"></script>

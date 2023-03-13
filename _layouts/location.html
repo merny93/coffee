@@ -1,13 +1,13 @@
 ---
 layout: default
 ---
-
-<h1>{{ page.location_visible_name }}</h1>
+<div>
+<h3>{{ page.location_visible_name }}</h3>
 
 <!-- Now add the short description or whatever  -->
 {{ content }} 
 
- <hr>
+ <!-- <hr> -->
 
 {% assign filtered_posts = site.posts | where: 'location', page.location_visible_name %}
 <!-- make filtered_posts which is all the posts where location matches location_visible_name -->
@@ -15,7 +15,7 @@ layout: default
     {% for post in filtered_posts %}
 
     <!------------------------------------------------------------>
-    <!-- Get the parity of the current itteration -->
+    <!-- Get the parity of the current iteration -->
     {% assign parity = forloop.index0 | modulo:2%}
 
     <!-- Set it left or right depending on the parity -->
@@ -27,25 +27,25 @@ layout: default
     <!------------------------------------------------------------>
 
         <!-- Set up the scores at the top of the review -->
-        <div class="review_scores_container">
-            <div class="score_container mainscore">
-                <div class="score_table">
+        <div class="review-scores-container">
+            <div class="score-container mainscore">
+                <div class="score-table">
                     {{post.score_overall}} <br> Overall
                 </div>
-                <div class="score_table">
+                <div class="score-table">
                     {{post.score_vibe}} <br> Vibe
                 </div>
             </div>
-            <div class="score_container subscore">
+            <div class="score-container subscore">
                 {% for key_value_pair in post.scores %}
-                    <div class = "subscore score_table">
+                    <div class = "subscore score-table">
                         {{key_value_pair[1]}} <br> {{key_value_pair[0]}}
                     </div>
                 {% endfor %}
             </div>
         </div>
 
-        <hr>
+        <!-- <hr> -->
         
         <!-- Put the actual review content in here -->
         <div class="review_content">
@@ -54,4 +54,5 @@ layout: default
         </div>
     </div>
     {% endfor %}
+</div>
 </div>

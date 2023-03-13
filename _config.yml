@@ -13,9 +13,5 @@ defaults:
       type: "posts"
     values:
       layout: "empty"
-  - scope:
-      path: ""
-    values:
-      layout: "default"
 
 baseurl: '/coffee'
