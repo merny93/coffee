@@ -21,7 +21,7 @@ title: Home
         </div>
         {% for location in site.locations %}
         <!-- <a href="{{site.baseurl}}{{ location.url }}"> -->
-        <div class="location_container" id="{{location.location_visible_name | slugify}}" onclick="openLocation('{{site.baseurl}}{{ location.url }}')">
+        <div class="location_container" id="{{location.location_visible_name | slugify}}" onclick="openLocation('{{site.baseurl}}{{ location.url }}', this.id)">
             <div class="description_holder" > 
                 <h4>{{ location.location_visible_name }}</h4>
                 {{ location.content | markdownify }}
