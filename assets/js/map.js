@@ -1,6 +1,3 @@
----
----
-
 //icon for map`
 var myIcon = L.icon({
     iconUrl: 'assets/icons/map-pin.svg',
@@ -15,99 +12,99 @@ var myIconHover = L.icon({
 
 });
 
-//populate the locs object with the locations from the site data
-let locs = {};
-
-{% comment %} Loop through the locations {% endcomment %}
-{% for location in site.locations %}
-
-    //unified name generation
-    {% assign loc = location.location_visible_name | slugify %}
-    {% assign ns = loc | replace: "-", "_" %}
-
-    let {{ns}} = {};
-    //generate the marker
-    {{ns}}.mrk = L.marker([{{location.location_coordinates.lat}}, {{location.location_coordinates.lon}}], {icon: myIcon});
-
-    //function to adjust styles on hover
-    {{ns}}.mrk_enter = function(){
-        locs["{{loc}}"]["marker"].setIcon(myIconHover);
-        document.getElementById("{{loc}}").classList.add("darken");
-    };
-
-    //function to adjust styles on leave
-    {{ns}}.mrk_leave = function(){
-        locs["{{loc}}"]["marker"].setIcon(myIcon);
-        document.getElementById("{{loc}}").classList.remove("darken");
-    };
-
-    //function to open the location preview with click on marker
-    {{ns}}.mrk_click = function(){
-        document.getElementById("{{loc}}").click();
-    }
-
-    //generate event listeners for location list hover
-    {{ns}}.create_hover = function(){
-        document.getElementById("{{loc}}").addEventListener("mouseenter", {{ns}}.mrk_enter);
-        document.getElementById("{{loc}}").addEventListener("mouseleave", {{ns}}.mrk_leave);
-
-        //event listeners for hover color
-        {{ns}}.mrk.addEventListener("mouseover", {{ns}}.mrk_enter);
-        {{ns}}.mrk.addEventListener("mouseout", {{ns}}.mrk_leave);
-    }
-
-    //generate event listeners for location list hover
-    {{ns}}.delete_hover = function(){
-        document.getElementById("{{loc}}").removeEventListener("mouseenter", {{ns}}.mrk_enter);
-        document.getElementById("{{loc}}").removeEventListener("mouseleave", {{ns}}.mrk_leave);
-
-        //event listeners for hover color
-        {{ns}}.mrk.removeEventListener("mouseover", {{ns}}.mrk_enter);
-        {{ns}}.mrk.removeEventListener("mouseout", {{ns}}.mrk_leave);
-    }
-
-    {{ns}}.create_hover();
-
-    //event listener for click
-    {{ns}}.mrk.addEventListener("click", {{ns}}.mrk_click);
-
-    locs[ "{{loc}}" ] = {
-        "lat": {{location.location_coordinates.lat}},
-        "lon": {{location.location_coordinates.lon}},
-        "html_obj": document.getElementById("{{loc}}"),
-        "visible": true,
-        "marker" : {{ns}}.mrk,
-        "hover_create": {{ns}}.create_hover,
-        "hover_abort": {{ns}}.delete_hover,
-    };
-
-{% endfor %}
-
-addEventListener("popstate", function(e) {
-    for (loc in locs){
-        if (loc != e.state.id){
-            locs[loc].html_obj.classList.remove("darken");
-        }
-    }
-});
 
 //create the map
 var map = L.map('map').setView([42.360, -71.059], 13);
-
-//trigger events to update which markers are visible
-map.on("move", updateMarkers);
-map.on("zoom", updateMarkers);
-
 
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
-//add the markers (and store them in the locs object)
-for (loc in locs){
-    locs[loc]["marker"].addTo(map);
+//populate the locs object with the locations from the site data
+let locs = {};
+
+async function initMap(){
+
+    const resp = await fetch("assets/database/locations.json");
+    const locs_loaded = await resp.json();
+    for (loc in locs_loaded){
+        let mrk = L.marker([locs_loaded[loc]["lat"], locs_loaded[loc]["lon"]], {icon: myIcon});
+        let obj = document.getElementById(loc);
+
+        //function to adjust styles on hover
+        let mrk_enter = function(){
+            mrk.setIcon(myIconHover);
+            obj.classList.add("darken");
+        };
+
+        //function to adjust styles on leave
+        let mrk_leave = function(){
+            mrk.setIcon(myIcon);
+            obj.classList.remove("darken");
+        };
+
+        //function to open the location preview with click on marker
+        let mrk_click = function(){
+            obj.click();
+        }
+
+        //generate event listeners for location list hover
+        let create_hover = function(){
+            obj.addEventListener("mouseenter", mrk_enter);
+            obj.addEventListener("mouseleave", mrk_leave);
+
+            //event listeners for hover color
+            mrk.addEventListener("mouseover", mrk_enter);
+            mrk.addEventListener("mouseout", mrk_leave);
+        }
+
+        //generate event listeners for location list hover
+        let delete_hover = function(){
+            obj.removeEventListener("mouseenter", mrk_enter);
+            obj.removeEventListener("mouseleave", mrk_leave);
+
+            //event listeners for hover color
+            mrk.removeEventListener("mouseover", mrk_enter);
+            mrk.removeEventListener("mouseout", mrk_leave);
+        }
+        create_hover();
+
+        //event listener for click
+        mrk.addEventListener("click", mrk_click);
+
+        //add the markers (and store them in the locs object)
+        mrk.addTo(map);
+
+
+        locs[ loc] = {
+            "lat": locs_loaded[loc]["lat"],
+            "lon": locs_loaded[loc]["lon"],
+            "html_obj": obj,
+            "visible": true,
+            "marker" : mrk,
+            "hover_create": create_hover,
+            "hover_abort": delete_hover,
+        };
+
+    }
 }
+initMap();
+
+// This function does not seem to do anything. on the chopping block... somehow related to the back/forward functionality
+// addEventListener("popstate", function(e) {
+//     for (loc in locs){
+//         if (loc != e.state.id){
+//             locs[loc].html_obj.classList.remove("darken");
+//         }
+//     }
+// });
+
+
+
+
+
+
 
 //update which markers are visible in locs
 function updateMarkers(){
@@ -121,5 +118,11 @@ function updateMarkers(){
         }
     }
 }
+
+//trigger events to update which markers are visible
+map.on("move", updateMarkers);
+map.on("zoom", updateMarkers);
+
+
 
 

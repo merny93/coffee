@@ -1,0 +1,15 @@
+---
+---
+{
+    {%- assign num = 0 -%}
+    {%- for location in site.locations -%}
+    {%- assign loc = location.location_visible_name | slugify -%}
+    {%- assign num = num | plus: 1 -%}
+    {%- if num > 1 -%},{% endif %}
+    "{{loc}}" : {
+        "lat": {{location.location_coordinates.lat}},
+        "lon": {{location.location_coordinates.lon}}
+    }
+    {%-endfor-%}
+    {% comment %}{% endcomment %}
+}
