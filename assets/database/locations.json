@@ -8,8 +8,14 @@
     {%- if num > 1 -%},{% endif %}
     "{{loc}}" : {
         "lat": {{location.location_coordinates.lat}},
-        "lon": {{location.location_coordinates.lon}}
+        "lon": {{location.location_coordinates.lon}},
+        "location-visible-name": "{{location.location_visible_name}}",
+        "description": "{{location.content | strip_html | strip_newlines | escape}}",
+        {% assign filtered_review = site.posts | where: 'location', location.location_visible_name -%}
+        "score-overall": {%- if filtered_review[0].score_overall -%} {{filtered_review[0].score_overall}} {%- else -%} "~" {%- endif -%},
+        "score-vibe":{%- if filtered_review[0].score_vibe -%} {{filtered_review[0].score_vibe}} {%- else -%} "~" {%- endif -%},
+        "location-url": "{{site.baseurl}}{{location.url}}"
     }
-    {%-endfor-%}
+    {%- endfor -%}
     {% comment %}{% endcomment %}
 }

@@ -40,7 +40,11 @@ function openLocation(location_url, id, push_state = true){
     if (overlay_contents.firstElementChild != null) {
         overlay_contents.removeChild(overlay_contents.firstElementChild);
     }   
-    httpGetAsync(location_url, openLocationCallback)
+    httpGetAsync(location_url, function (response) {
+        let parser = new DOMParser();
+        let doc = parser.parseFromString(response, "text/html");
+        overlay_contents.appendChild(doc.body.firstElementChild );
+    });
     overlay.classList.add("slide-in");
     // remove "darken" from all locations
     update_hover();
@@ -65,9 +69,7 @@ function update_hover(){
 }
 
 function openLocationCallback(response){
-    let parser = new DOMParser();
-    let doc = parser.parseFromString(response, "text/html");
-    overlay_contents.appendChild(doc.body.firstElementChild );
+    
 }
 
 function closeLocation(){
@@ -89,3 +91,4 @@ addEventListener('popstate', function(event) {
         openLocation(event.state.resource, event.state.id, push_state = false);
     }
 });
+
