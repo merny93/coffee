@@ -1,0 +1,38 @@
+{
+    "an-over-the-counter-favourite" : {
+        "lat": 42.342,
+        "lon": -71.056,
+        "location-visible-name": "An over-the-counter favourite",
+        "description": "Second try",
+        "score-overall":"~",
+        "score-vibe":"~",
+        "location-url": "/coffee/locations/another-shop.html"
+    },
+    "an-intriguing-restaurant" : {
+        "lat": 42.36,
+        "lon": -71.039,
+        "location-visible-name": "An intriguing restaurant",
+        "description": "Second try",
+        "score-overall":"~",
+        "score-vibe":"~",
+        "location-url": "/coffee/locations/next-shop.html"
+    },
+    "an-avant-garde-culinary-experience" : {
+        "lat": 42.369,
+        "lon": -71.051,
+        "location-visible-name": "An avant-garde culinary experience",
+        "description": "Second try",
+        "score-overall":13,
+        "score-vibe":42,
+        "location-url": "/coffee/locations/second-shop.html"
+    },
+    "the-best-coffee-shop-in-princeton" : {
+        "lat": 42.358,
+        "lon": -71.062,
+        "location-visible-name": "The best coffee shop in princeton",
+        "description": "A short description of the Cafe",
+        "score-overall":5,
+        "score-vibe":4,
+        "location-url": "/coffee/locations/test-shop.html"
+    }
+}

@@ -4,52 +4,63 @@
     <meta charset="utf-8">
     <title>Home</title>
     <link rel="stylesheet" href="/coffee/assets/css/styles.css">
+    
+    <!-- import 'IBM Plex Mono font' -->
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+    
+    <!-- Stuff for leaflet.js -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+     crossorigin=""/>
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+    integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+    crossorigin=""></script>
   </head>
   <body>
     <!-- <nav>
     
   </nav> -->
-    <h1>Locations</h1>
+    <h3 id="title">Some Food Locations</h3>
 
-
-
-<a href="/coffee/locations/secondshop.html">
-<div class="location_container">
-    <div class="description_holder" > 
-        <h2>A new location</h2>
-        <p>Second try</p>
-
-    </div>
-    
-    <div class="score_container">
-        <div class="score_table">
-            13 <br> Overall
+<div class="big-wrapper">
+    <div class="locations-wrapper column" style="position: relative;">
+        <div id="overlay">
+            <div class="overlay-wrapper">
+                <button id="close" onclick="closeLocation()">&#8617; close</button>
+                <div id="overlay-contents">
+                </div>
+            </div>
         </div>
-        <div class="score_table">
-            42 <br> Vibe
-        </div>
+        <div id="location-parent">
+        <template id="location-template">
+            <div class="location_container">
+                <div class="description_holder" > 
+                    <h4 id="location-name">
+                        <!-- name goes here -->
+                    </h4>
+                    <div id="location-description" > <!-- description goes here --> </div>
+                </div>
+
+                <div class="score-container">
+                    <div class="score-table">
+                        <div id="location-score-overall"> <!--score overall--> </div> <br> Overall 
+                    </div>
+                    <div class="score-table">
+                        <div id="location-score-vibe"> <!-- score vibe--> </div> <br> Vibe
+                    </div>
+                </div>
+            </div>
+        </template>
     </div>
+    </div> 
+    <!-- map -->
+    <div id="map" class="column" style="width: 200px;"></div>
 </div>
-</a>
 
-<a href="/coffee/locations/test_coffe_shop.html">
-<div class="location_container">
-    <div class="description_holder" > 
-        <h2>The best coffee shop in princeton</h2>
-        <p>A short description of the Cafe</p>
-
-    </div>
-    
-    <div class="score_container">
-        <div class="score_table">
-            5 <br> Overall
-        </div>
-        <div class="score_table">
-            4 <br> Vibe
-        </div>
-    </div>
-</div>
-</a>
-
+<!-- load the js script -->
+<script src="/coffee/assets/js/script.js"></script>
+<script src="/coffee/assets/js/map.js"></script>
+<script src="/coffee/assets/js/fetchData.js"></script>
   </body>
 </html>

@@ -2,20 +2,33 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Secondshop</title>
+    <title>Second Shop</title>
     <link rel="stylesheet" href="/coffee/assets/css/styles.css">
+    
+    <!-- import 'IBM Plex Mono font' -->
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+    
+    <!-- Stuff for leaflet.js -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+     crossorigin=""/>
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+    integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+    crossorigin=""></script>
   </head>
   <body>
     <!-- <nav>
     
   </nav> -->
-    <h1>A new location</h1>
+    <div>
+<h3>An avant-garde culinary experience</h3>
 
 <!-- Now add the short description or whatever  -->
 <p>Second try</p>
  
 
- <hr>
+ <!-- <hr> -->
 
 
 <!-- make filtered_posts which is all the posts where location matches location_visible_name -->
@@ -23,7 +36,7 @@
     
 
     <!------------------------------------------------------------>
-    <!-- Get the parity of the current itteration -->
+    <!-- Get the parity of the current iteration -->
     
 
     <!-- Set it left or right depending on the parity -->
@@ -33,21 +46,21 @@
     <!------------------------------------------------------------>
 
         <!-- Set up the scores at the top of the review -->
-        <div class="review_scores_container">
-            <div class="score_container mainscore">
-                <div class="score_table">
+        <div class="review-scores-container">
+            <div class="score-container mainscore">
+                <div class="score-table">
                     13 <br> Overall
                 </div>
-                <div class="score_table">
+                <div class="score-table">
                     42 <br> Vibe
                 </div>
             </div>
-            <div class="score_container subscore">
+            <div class="score-container subscore">
                 
             </div>
         </div>
 
-        <hr>
+        <!-- <hr> -->
         
         <!-- Put the actual review content in here -->
         <div class="review_content">
@@ -57,6 +70,7 @@
         </div>
     </div>
     
+</div>
 </div>
   </body>
 </html>
