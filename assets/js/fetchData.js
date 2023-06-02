@@ -95,6 +95,18 @@ async function initMap(locs_loaded){
     }
 }
 
+function replaceStateFromHash(locs_loaded){
+    //generate a attempt at a state from the hash
+    if (location.hash != "") {
+        let hash = location.hash;
+        let id = hash.substring(1);
+        implementState(state(prev=true, resource=locs_loaded[id]["location-url"], id=id), last_state_global);
+        history.replaceState(state(prev=true, resource=locs_loaded[id]["location-url"], id=id), "nothing");
+    } else {
+        history.replaceState(state(), "nothing");
+    }
+}
+
 
 async function fetchData(){
     const resp = await fetch("assets/database/locations.json");
@@ -103,6 +115,16 @@ async function fetchData(){
     //now that it is loaded spawn the 
     await initBrowser(locs_loaded);
     await initMap(locs_loaded);
+
+    //replace the state from the hash
+    replaceStateFromHash(locs_loaded);
+    
+
 }
+
 //call it
 fetchData();
+
+
+//create a last state object used sometimes for back
+let last_state_global = state();
