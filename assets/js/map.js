@@ -12,8 +12,10 @@ var myIconHover = L.icon({
 
 });
 
+const MAP_ZOOMED_IN = 15;
 
 //create the map
+//maybe change where .setView is centered
 var map = L.map('map').setView([42.360, -71.059], 13);
 
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -24,24 +26,6 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 //populate the locs object with the locations from the site data
 // will be populated by fetchData.js
 let locs = {};
-
-
-
-
-// This function does not seem to do anything. on the chopping block... somehow related to the back/forward functionality
-// addEventListener("popstate", function(e) {
-//     for (loc in locs){
-//         if (loc != e.state.id){
-//             locs[loc].html_obj.classList.remove("darken");
-//         }
-//     }
-// });
-
-
-
-
-
-
 
 //update which markers are visible in locs
 function updateMarkers(){
@@ -60,6 +44,20 @@ function updateMarkers(){
 map.on("move", updateMarkers);
 map.on("zoom", updateMarkers);
 
+function mapFocus(location_id, previous_state){
+    if (previous_state["zoom"] > MAP_ZOOMED_IN) {
+        //give the previous state
+        map.setView(previous_state["latlon"], previous_state["zoom"]);
+        return
+    } else if (map.getZoom() > MAP_ZOOMED_IN) {
+        //do nothing too zoomed in 
+        return
+    }
+
+    let lat = locs[location_id]["lat"];
+    let lon = locs[location_id]["lon"];
+    map.setView([lat, lon], MAP_ZOOMED_IN);
+}
 
 
 
