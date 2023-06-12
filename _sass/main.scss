@@ -8,185 +8,199 @@ $review-opacity: 1;
 $location-opacity: 1;
 
 body {
-    background-color: $background;
-    font-family: 'IBM Plex Mono', 'Menlo', 'Monaco', monospace;
+  background-color: $background;
+  font-family: "IBM Plex Mono", "Menlo", "Monaco", monospace;
 }
 
-a{
-    text-decoration: none;
-    color: inherit;
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 h3 {
-    padding-bottom: 10px;
+  padding-bottom: 10px;
 }
 button {
-    font-family: inherit;
-    border: none;
-    background-color: $accent-light;
-    border-radius: 3px;
-    padding: 3px 5px 3px 5px;
+  font-family: inherit;
+  border: none;
+  background-color: $accent-light;
+  border-radius: 3px;
+  padding: 3px 5px 3px 5px;
 }
-button:hover{
-    background-color: $accent-mid;
-    cursor: pointer;
+button:hover {
+  background-color: $accent-mid;
+  cursor: pointer;
 }
-
 
 #title {
-    padding-left: 10px;
+  padding-left: 10px;
 }
 
-h4{
-    margin: 0;
+h4 {
+  margin: 0;
 }
 
-hr{
-    border-top: $accent-dark solid 2px;
-    border-bottom: 0;
-    margin-left: 10%;
-    margin-right: 10%;
+hr {
+  border-top: $accent-dark solid 2px;
+  border-bottom: 0;
+  margin-left: 10%;
+  margin-right: 10%;
 }
 
 // score base styling
-@mixin score_base(){
-    display: flex;
-    align-items: center;
-    font-size: 1em;
-    // font-weight: bold;
+@mixin score_base() {
+  display: flex;
+  align-items: center;
+  font-size: 1em;
+  // font-weight: bold;
 }
 
-.location_container{
-    border-bottom: $accent-dark solid 2px;
-    border-top: $accent-dark solid 2px;
-    // border-radius: 5px;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-top: -2px; // to hide border
-    // width: m#{a}x(50vw, 600px);
-    padding: 10px;
-    display: flex;
-    // background-color: rgba($light-gray, $location-opacity);
-    cursor: pointer;
-    .score-container{
-        // for score in main page
-        @include score_base;
-        margin-left: auto;
-    }
+.location_container {
+  border-bottom: $accent-dark solid 2px;
+  border-top: $accent-dark solid 2px;
+  // border-radius: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: -2px; // to hide border
+  // width: m#{a}x(50vw, 600px);
+  padding: 10px;
+  display: flex;
+  // background-color: rgba($light-gray, $location-opacity);
+  cursor: pointer;
+  .score-container {
+    // for score in main page
+    @include score_base;
+    margin-left: auto;
+  }
 }
 
-.location_container:hover{
-    background-color: rgba($accent-light, $location-opacity);
+.location_container:hover {
+  background-color: rgba($accent-light, $location-opacity);
 }
 
-.location_container:hover .score-table{
-    background-color: $accent-mid;
+.location_container:hover .score-table {
+  background-color: $accent-mid;
 }
 
 .location_container.darken {
-    background-color: $accent-light;
+  background-color: $accent-light;
 }
 .score-table.darken {
-    background-color: $accent-mid;
+  background-color: $accent-mid;
 }
 
 .column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+  height: 500px;
+}
+
+.big-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+@media screen and (max-width: 500px) {
+  // THIS ISN'T WORKING WHY
+  .column {
     display: flex;
     flex-direction: column;
     flex-basis: 100%;
     flex: 1;
     height: 500px;
-}
+  }
 
-.big-wrapper{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+  .big-wrapper {
+    display: block;
     width: 100%;
+  }
 }
 
-.score-table{
-    height: min-content;
-    text-align: center;
-    padding: 5px;
-    // border-bottom: $accent-dark solid 2px;
-    border-radius: 3px;
-    background-color: $accent-light;
-    margin: 5px;
-    line-height: 125%;
-    // background-color: $light-gray;
+.score-table {
+  height: min-content;
+  text-align: center;
+  padding: 5px;
+  // border-bottom: $accent-dark solid 2px;
+  border-radius: 3px;
+  background-color: $accent-light;
+  margin: 5px;
+  line-height: 125%;
+  // background-color: $light-gray;
 }
 
-.reviews_container{
-    max-width: 85vw;
+.reviews_container {
+  max-width: 85vw;
 }
-.review{
-    border: solid 2px;
-    border-radius: 5px;
-    // width: m#{a}x(80%, 200px);
-    // min-width: fit-content;
-    // width: 7%;
-    padding: 15px;
-    margin: 15px;
-}
-
-.left{
-    // background-color: rgba($light-gray, $review-opacity);
+.review {
+  border: solid 2px;
+  border-radius: 5px;
+  // width: m#{a}x(80%, 200px);
+  // min-width: fit-content;
+  // width: 7%;
+  padding: 15px;
+  margin: 15px;
 }
 
-.right{
-    // background-color: rgba($accent-light, $review-opacity);
-    margin-left: auto;
+.left {
+  // background-color: rgba($light-gray, $review-opacity);
 }
 
-.review-scores-container{
-    display: flex;
-    align-items: flex-start;
-    flex-direction: row;
-    // flex-wrap: wrap;
-    .score-container{
-        // for all scores in location page
-        @include score_base;
-    }
+.right {
+  // background-color: rgba($accent-light, $review-opacity);
+  margin-left: auto;
 }
-.mainscore{
-    // for score in location page
-    margin-right: 25px;
+
+.review-scores-container {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+  // flex-wrap: wrap;
+  .score-container {
+    // for all scores in location page
+    @include score_base;
+  }
 }
-.subscore{
-    // for subscore in location page
-    text-size-adjust: 50%;
-    margin-left: auto;
-    margin-top: 30px;
-    
+.mainscore {
+  // for score in location page
+  margin-right: 25px;
+}
+.subscore {
+  // for subscore in location page
+  text-size-adjust: 50%;
+  margin-left: auto;
+  margin-top: 30px;
 }
 
 #map {
-    margin-top: -2px; // to align with left column
+  margin-top: -2px; // to align with left column
 }
 
 #overlay {
-    height:100%;
-    width:100%; 
-    position: absolute; 
-    left: -100%; 
-    margin-top: -2px; // to align left and right columns
-    -moz-transition: all .5s ease-in-out;
-    -webkit-transition: all .5s ease-in-out;
-    -o-transition: all .5s ease-in-out;
-    transition: all .5s ease-in-out;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: -100%;
+  margin-top: -2px; // to align left and right columns
+  -moz-transition: all 0.5s ease-in-out;
+  -webkit-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 
 .slide-in {
-    transform: translateX(100%);
+  transform: translateX(100%);
 }
 
 .overlay-wrapper {
-    height:100%; 
-    margin-left:10px; 
-    margin-right: 10px;
-    background-color: $background;
-    overflow: scroll;
-    border: $accent-dark solid 2px;
-    padding: 10px;
+  height: 100%;
+  margin-left: 10px;
+  margin-right: 10px;
+  background-color: $background;
+  overflow: scroll;
+  border: $accent-dark solid 2px;
+  padding: 10px;
 }

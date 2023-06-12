@@ -5,44 +5,45 @@ layout: default
 title: Home
 ---
 
-
-
-
 <h3 id="title">Some Food Locations</h3>
 
 <div class="big-wrapper">
-    <div class="locations-wrapper column" style="position: relative;">
-        <div id="overlay">
-            <div class="overlay-wrapper">
-                <button id="close" onclick="closeLocation()">&#8617; close</button>
-                <div id="overlay-loading-indicator" style="display: none;" > LOADING </div>
-                <div id="overlay-contents"> </div>
-            </div>
-        </div>
-        <div id="location-parent">
-        <template id="location-template">
-            <div class="location_container">
-                <div class="description_holder" > 
-                    <h4 id="location-name">
-                        <!-- name goes here -->
-                    </h4>
-                    <div id="location-description" > <!-- description goes here --> </div>
-                </div>
-
-                <div class="score-container">
-                    <div class="score-table">
-                        <div id="location-score-overall"> <!--score overall--> </div> <br> Overall 
-                    </div>
-                    <div class="score-table">
-                        <div id="location-score-vibe"> <!-- score vibe--> </div> <br> Vibe
-                    </div>
-                </div>
-            </div>
-        </template>
+  <div class="locations-wrapper column" style="position: relative">
+    <div id="overlay">
+      <div class="overlay-wrapper">
+        <button id="close" onclick="closeLocation()">&#8617; close</button>
+        <div id="overlay-loading-indicator" style="display: none">LOADING</div>
+        <div id="overlay-contents"></div>
+      </div>
     </div>
-    </div> 
-    <!-- map -->
-    <div id="map" class="column" style="width: 200px;"></div>
+    <div id="location-parent">
+      <template id="location-template">
+        <div class="location_container">
+          <div class="description_holder">
+            <h4 id="location-name">
+              <!-- name goes here -->
+            </h4>
+            <div id="location-description"><!-- description goes here --></div>
+          </div>
+
+          <div class="score-container">
+            <div class="score-table">
+              <div id="location-score-overall"><!--score overall--></div>
+              <br />
+              Overall
+            </div>
+            <div class="score-table">
+              <div id="location-score-vibe"><!-- score vibe--></div>
+              <br />
+              Vibe
+            </div>
+          </div>
+        </div>
+      </template>
+    </div>
+  </div>
+  <!-- map -->
+  <div id="map" class="column" style="width: 200px"></div>
 </div>
 
 <!-- load the js script -->
